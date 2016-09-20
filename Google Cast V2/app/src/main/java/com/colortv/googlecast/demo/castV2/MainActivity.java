@@ -10,12 +10,17 @@ import android.os.Bundle;
 import android.support.v7.app.MediaRouteActionProvider;
 import android.support.v7.media.MediaRouteSelector;
 import android.support.v7.media.MediaRouter;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.colortv.android.googlecast.ColorTvCastError;
 import com.colortv.android.googlecast.ColorTvCastSDK;
+import com.colortv.android.googlecast.listeners.ColorTvCastAdListener;
+import com.colortv.android.googlecast.listeners.OnCurrencyEarnedListener;
 import com.colortv.googlecast.demo.castV2.connection.CastApiManager;
 import com.colortv.googlecast.demo.castV2.connection.CastChannel;
 import com.google.android.gms.cast.CastDevice;
@@ -24,6 +29,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     private static int GOOGLE_PLAY_SERVICES_ERROR_DIALOG_RESULT = 1;
 
@@ -114,6 +120,32 @@ public class MainActivity extends AppCompatActivity {
     private void initColorTvCastSDK() {
         ColorTvCastSDK.setDebugMode(true);
         ColorTvCastSDK.init(getApplicationContext(), mediaRouteSelector);
+        registerListeners();
+    }
+
+    private void registerListeners() {
+        ColorTvCastSDK.registerAdListener(new ColorTvCastAdListener() {
+            @Override
+            public void onAdOpened() {
+                Log.d(TAG, "Ad Opened");
+            }
+
+            @Override
+            public void onAdClosed() {
+                Log.d(TAG, "Ad Closed");
+            }
+
+            @Override
+            public void onAdError(ColorTvCastError colorTvCastError) {
+                Log.e("TAG", colorTvCastError.getErrorMessage());
+            }
+        });
+        ColorTvCastSDK.addOnCurrencyEarnedListener(new OnCurrencyEarnedListener() {
+            @Override
+            public void onCurrencyEarned(String placement, int currencyAmount, String currencyType) {
+                Toast.makeText(MainActivity.this, String.format("Granted %d %s for %s", currencyAmount, currencyType, placement), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     protected void sendMessage(String message) {
