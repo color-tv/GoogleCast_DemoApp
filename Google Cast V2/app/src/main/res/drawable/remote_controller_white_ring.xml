@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="ring"
+    android:innerRadius="@dimen/remote_controller_white_ring_inner_radius"
+    android:thickness="@dimen/remote_controller_white_ring_thickness">
+
+    <size
+        android:height="@dimen/remote_controller_diagonal"
+        android:width="@dimen/remote_controller_diagonal"/>
+
+    <solid
+        android:color="@android:color/white"/>
+
+</shape>
