@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="@color/remote_controller_background"/>
+    <size
+        android:height="@dimen/remote_controller_diagonal"
+        android:width="@dimen/remote_controller_diagonal"/>
+
+</shape>
