@@ -1,10 +1,6 @@
 const constants = {
   appId: 'caad36a7-4d30-4880-9b4d-ab0a30501853',
   channelNamespace: 'urn:x-cast:com.colortv.testapp',
-  status: {
-    RUNNING: 'RUNNING',
-    PAUSED: 'PAUSED'
-  },
   senderMessages: {
     UP: 'MOVE_UP',
     LEFT: 'MOVE_LEFT',
@@ -30,13 +26,12 @@ const constants = {
   }
 }
 
-var color, castManager, channelConnection, selectedItem, status
+var color, castManager, channelConnection, selectedItem
 
 window.addEventListener('ColorTVSDKReady', function () {
   'use strict';
   color = window.ColorTVSDK.getInstance()
   castManager = window.cast.receiver.CastReceiverManager.getInstance()
-  status = constants.status.RUNNING
   color.init({
     appId: constants.appId
   }, function (error) {
@@ -52,9 +47,6 @@ function initializeApplication () {
   castManager.start()
 }
 function onSenderMessage (message) {
-  if (status === constants.status.PAUSED) {
-    return
-  }
   switch (message.data) {
     case constants.senderMessages.UP:
       break
@@ -95,7 +87,6 @@ function getNextItem (selectedItem, direction) {
   return constants.navigation[ actual.toUpperCase() ][ direction ]
 }
 function itemClick () {
-  status = constants.status.PAUSED
   let clickedItem = selectedItem.getAttribute('id')
   switch (clickedItem) {
     case 'discovery':
@@ -108,8 +99,6 @@ function itemClick () {
         color.showAd({
           placement: window.ColorTVSDK.Placements.APP_WALL,
           node: document.getElementById('insertAdsHere')
-        }, function () {
-          status = constants.status.RUNNING
         })
       })
       break
@@ -123,8 +112,6 @@ function itemClick () {
         color.showAd({
           placement: window.ColorTVSDK.Placements.INTERSTITIAL,
           node: document.getElementById('insertAdsHere')
-        }, function () {
-          status = constants.status.RUNNING
         })
       })
       break
@@ -138,8 +125,6 @@ function itemClick () {
         color.showAd({
           placement: window.ColorTVSDK.Placements.FULL_SCREEN,
           node: document.getElementById('insertAdsHere')
-        }, function () {
-          status = constants.status.RUNNING
         })
       })
       break
@@ -153,8 +138,6 @@ function itemClick () {
         color.showAd({
           placement: window.ColorTVSDK.Placements.VIDEO,
           node: document.getElementById('insertAdsHere')
-        }, function () {
-          status = constants.status.RUNNING
         })
       })
       break
