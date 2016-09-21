@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CastOptionsProvider implements OptionsProvider {
-    private static final String APP_ID = "CAEE9D41";
+    private static final String APP_ID = "6F846038";
 
     private static final String TESTAPP_NAMESPACE = "urn:x-cast:com.colortv.testapp";
 

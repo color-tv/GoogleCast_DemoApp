@@ -1,0 +1,70 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-image: url('./background.jpg');
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 60px;
+    width: 100%;
+    color: whitesmoke;
+}
+
+.menu .menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+    border-width: 0px;
+    border-color: transparent;
+    flex-basis: 18%;
+    height: 70px;
+    transition: background-color 0.2s linear;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+#discovery {
+    background-color: #E35050;
+}
+
+#discovery.active {
+    background-color: #ff3030;
+}
+
+#interstitial {
+    background-color: #FEC550;
+}
+
+#interstitial.active {
+    background-color: #feb41b;
+}
+
+#engagement {
+    background-color: #AFD739;
+}
+
+#engagement.active {
+    background-color: #b6f00b;
+}
+
+#video {
+    background-color: #79ccec;
+}
+
+#video.active {
+    background-color: #42caff;
+}
